@@ -65,11 +65,9 @@ serve(async (req) => {
     HumanMessagePromptTemplate.fromTemplate(template),
   ]);
 
-  const pastMessages = data.messages.map((msg: {text: string}, i: number) => {
-    //console.log(m);
-    //const msg = JSON.parse(m);
+  const pastMessages = data.messages ? data.messages.map((msg: {text: string}, i: number) => {
     return (i % 2 == 0 ? new HumanChatMessage(msg.text) : new AIChatMessage(msg.text));
-  })
+  }) : [];
 
   console.log(pastMessages);
 

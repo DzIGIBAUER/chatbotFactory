@@ -2,7 +2,7 @@
     export let data;
 
     $: ({ chatbot, supabase } = data);
-    $: messages = chatbot.messages as {text: string}[];
+    $: messages = chatbot.messages as {text: string}[] || [];
     let value = "";
     let loading = false;
 
@@ -23,7 +23,7 @@
             
         messages.push({ text: value });
         messages.push({ text: data.response });
-        messages = messages;
+        chatbot.messages = messages;
         
         value = "";
         loading = false;

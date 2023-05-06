@@ -39,18 +39,25 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">Skeleton</strong>
+				<a href="/"><strong class="text-xl uppercase">Skeleton</strong></a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				{#if !session}
 					<a
+					class="btn btn-sm variant-ghost-surface"
+					href="/auth"
+					rel="noreferrer"
+					>
+					Login
+				</a>
+				{:else}
+					<a
 						class="btn btn-sm variant-ghost-surface"
-						href="/auth"
+						href="/chat"
 						rel="noreferrer"
 					>
-						Login
+						Chat
 					</a>
-				{:else}
 					<button
 						class="btn btn-sm variant-ghost-surface"
 						on:click={logout}

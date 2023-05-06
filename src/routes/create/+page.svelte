@@ -7,6 +7,7 @@
     let inputChip = '';
     let inputChipList: string[] = ['Programming'];
     let loading = false;
+    let name = "";
 
     let temperature: number;
     let max = 1;
@@ -19,6 +20,7 @@
 
 
     const createChatbot = async () => {
+        if (!name) alert("Please provide a name");
         loading = true;
         
         const { data: vData, error: vError } = await supabase
@@ -45,7 +47,7 @@
             .functions
             .invoke("createChatbot", {
                 body: {
-                    name: "test",
+                    name,
                     topics: inputChipList,
                     temperature
                 }
@@ -53,6 +55,8 @@
         
         console.log(cData);
         
+        goto("chat/");
+
         loading = false;
     }
 
@@ -61,6 +65,10 @@
 <div class="flex justify-center place-items-center h-100 p-20">
     <div class="card p-8 mx-20 max-w-md">
         <h2 class="pb-5">Create a chatbot</h2>
+        <label>
+            Name:
+            <input class="input" type="text" bind:value={name} />
+        </label>
         <InputChip
             bind:input={inputChip}
             bind:value={inputChipList}
